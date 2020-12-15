@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:prueba_flutter/src/screens/home/details/detail_item_screen.dart';
 import 'package:prueba_flutter/src/screens/home/home_screen.dart';
+import 'package:prueba_flutter/src/screens/need/need_next_screen.dart';
 import 'package:prueba_flutter/src/screens/need/need_screen.dart';
 
 class AppRoute {
@@ -14,6 +16,17 @@ class AppRoute {
       case '/need':
         return MaterialPageRoute(
           builder: (_) => NeedScreen(),
+        );
+        break;
+      case '/need2':
+        return MaterialPageRoute(
+          builder: (_) => NeedNextScreen(),
+        );
+        break;
+      case '/detail':
+      DetailArgument argument = settings.arguments;
+        return MaterialPageRoute(
+          builder: (_) => DetailItemScreen(arguments: argument),
         );
         break;
       // case '/message':

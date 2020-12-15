@@ -17,6 +17,7 @@ class TestFlutterColors {
 }
 
 final lightTheme = ThemeData(
+  unselectedWidgetColor: TestFlutterColors.orange,
   appBarTheme: AppBarTheme(
     color: TestFlutterColors.blue,
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
