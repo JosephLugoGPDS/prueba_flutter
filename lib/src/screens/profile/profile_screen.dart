@@ -1,9 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:prueba_flutter/core/theme/theme.dart';
+import 'package:prueba_flutter/src/auth/provider/auth_user_privider.dart';
 import 'package:prueba_flutter/src/screens/need/widget/button_nedd.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+
+  final AuthUserProvider auth = AuthUserProvider();
+
+  //!Cerrar sesion
+  cerrarSesion(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("¿Desea cerrar sesión?"),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          actions: <Widget>[
+            ButtonTheme(
+              height: 40,
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: TestFlutterColors.blue)),
+                color: TestFlutterColors.blue,
+                child: Text('Si',
+                    style: TextStyle(color: Colors.white, fontSize: 20),),
+                onPressed: () async {
+                  //ToDo: Arreglar
+                  await auth.logout();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            ButtonTheme(
+              height: 40,
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: TestFlutterColors.blue)),
+                color: TestFlutterColors.blue,
+                child: Text('No',
+                    style: TextStyle(color: Colors.white, fontSize: 20),),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -32,7 +87,8 @@ class ProfileScreen extends StatelessWidget {
               child: Container(),
             ),
             ButtonNeed(
-              text: "Editar Perfil",
+              text: "Cerrar Sesión",
+              onTap: (){cerrarSesion(context);},
             )
           ],
         ),
